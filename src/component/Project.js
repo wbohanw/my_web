@@ -19,6 +19,11 @@ export const Projects = () => {
 
   const projects1 = [
     {
+      title: "Claw Hand Robot",
+      description: "Robot used to setup the rocket onto the platform, Controlled by self designed web-interface",
+      imgUrl: projImg6,
+    },
+    {
       title: "Firefighter",
       description: "Mcgill Robohacks 2023 1st Place,\n trace the fire with sensor and putout with water",
       imgUrl: projImg1,
@@ -27,11 +32,6 @@ export const Projects = () => {
       title: "Cube Stack Robot",
       description: "Self navigating towards the dropoff point and release the corresponding color cube",
       imgUrl: projImg4,
-    },
-    {
-      title: "Claw Hand Robot",
-      description: "Robot used to setup the rocket onto the platform, Controlled by self designed web-interface",
-      imgUrl: projImg6,
     },
     {
       title: "City Sweeper",
