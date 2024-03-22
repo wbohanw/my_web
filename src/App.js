@@ -3,8 +3,7 @@ import { NavBar } from './component/NavBar';
 import { Banner } from './component/Banner';
 import {Skills} from "./component/Skills";
 import { Projects } from './component/Project';
-import Contact from './component/Contact';
-import Footer from './component/Footer';
+
 import "bootstrap/dist/css/bootstrap.min.css"
 import BOHAN from './component/BOHAN.tsx';
 import React from 'react';
