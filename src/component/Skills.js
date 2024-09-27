@@ -1,19 +1,20 @@
-import meter1 from "../assets/img/meter1.svg";
-import meter2 from "../assets/img/meter2.svg";
-import meter3 from "../assets/img/meter3.svg";
+import React, { useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import arrow1 from "../assets/img/arrow1.svg";
-import arrow2 from "../assets/img/arrow2.svg";
 import colorSharp from "../assets/img/color-sharp.png"
-import ACDD from "./Song3";
 import Song1 from "./Song1";
 import Song2 from "./Song2";
 import Song3 from "./Song3";
+
 export const Skills = () => {
+  const [openSong, setOpenSong] = useState(null);
+
+  const handleToggle = (song) => {
+    setOpenSong(openSong === song ? null : song);
+  };
+
   const responsive = {
     superLargeDesktop: {
-      // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
       items: 5
     },
@@ -37,30 +38,30 @@ export const Skills = () => {
             <div className="row">
                 <div className="col-12">
                     <div className="skill-bx wow zoomIn">
-                        <h2>Musics And Songs</h2>
-                        <p>BRUHHHHHH::::::<br></br> I do write songs sometime:::::::::</p>
+                        <h2>音乐和歌曲</h2>
+                        <p>这里是我创作的一些歌曲：</p>
                         <Carousel responsive={responsive} infinite={true} className="owl-carousel owl-theme skill-slider">
                             <div className="item">
-                                <Song1/>
+                                <Song1 
+                                  buttonText="歌曲 1" 
+                                  isOpen={openSong === 'song1'} 
+                                  onToggle={() => handleToggle('song1')} 
+                                />
                             </div>
                             <div className="item">
-                                <Song2/>
+                                <Song2 
+                                  buttonText="歌曲 2" 
+                                  isOpen={openSong === 'song2'} 
+                                  onToggle={() => handleToggle('song2')} 
+                                />
                             </div>
                             <div className="item">
-                                <Song3/>
+                                <Song3 
+                                  buttonText="歌曲 3" 
+                                  isOpen={openSong === 'song3'} 
+                                  onToggle={() => handleToggle('song3')} 
+                                />
                             </div>
-                            {/* <div className="item">
-                                <img src={meter2} alt="Image" />
-                                <h5>Brand Identity</h5>
-                            </div>
-                            <div className="item">
-                                <img src={meter3} alt="Image" />
-                                <h5>Logo Design</h5>
-                            </div>
-                            <div className="item">
-                                <img src={meter1} alt="Image" />
-                                <h5>Web Development</h5>
-                            </div> */}
                         </Carousel>
                     </div>
                 </div>

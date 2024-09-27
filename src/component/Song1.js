@@ -1,179 +1,46 @@
-import { useState } from 'react'
-import { useTransition, animated } from '@react-spring/web'
-import { styled } from '@stitches/react'
-import * as Dialog from '@radix-ui/react-dialog'
-import Pointer from '../pointer/Pointer.tsx'
+import React, { useState, useRef } from 'react';
+import './Song.css'; // 假设我们将创建一个新的CSS文件来存放样式
 
-export default function Song1 () {
-  const [isOpen, setIsOpen] = useState(false)
+const Song1 = ({ buttonText, isOpen, onToggle }) => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(null);
 
-  const handleDialogChange = (isOpen) => setIsOpen(isOpen)
-
-  const transition = useTransition(isOpen, {
-    from: {
-      scale: 0,
-      opacity: 0,
-    },
-    enter: {
-      scale: 1,
-      opacity: 1,
-    },
-    leave: {
-      scale: 0,
-      opacity: 0,
-    },
-  })
+  const togglePlay = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play().catch(error => {
+          console.error("播放被中断: ", error);
+        });
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
 
   return (
-    <Dialog.Root open={isOpen} onOpenChange={handleDialogChange}>
-      <Trigger>
-        <TriggerShadow />
-        <TriggerEdge />
-        <TriggerLabel>未完成的作品 Unfinish</TriggerLabel>
-      </Trigger>
-      <Dialog.Portal forceMount>
-        {transition((style, isOpen) => (
-          <>
-            {isOpen ? (
-              <OverlayBackground style={{ opacity: style.opacity }} />
-            ) : null}
-            {isOpen ? (
-              <Content forceMount style={style}>
-                <DialogHeader>
-                  <CloseButton>
-                    <svg
-                      width="32"
-                      height="32"
-                      color='#129BCA'
-                      viewBox="0 0 32 32"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M15.9574 14.1689L8.59651 6.75098L6.73232 8.59598L14.1313 16.071L6.71338 23.4129L8.5964 25.2769L15.9574 17.8779L23.3943 25.2769L25.2392 23.4129L17.8213 16.071L25.2202 8.59598L23.3752 6.75098L15.9574 14.1689Z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                  </CloseButton>
-                  
-                </DialogHeader>
-                <Title>123123123</Title>
-              </Content>
-            ) : null}
-          </>
-        ))}
-      </Dialog.Portal>
-    </Dialog.Root>
-  )
-}
+    <div className={`song-container ${isOpen ? 'open' : ''}`}>
+      <button className="song-button" onClick={onToggle}>
+        {buttonText}
+      </button>
+      {isOpen && (
+        <div className="song-content">
+          <img 
+            src="/assets/img/song1-image.jpg" 
+            alt="Song 1" 
+            className={`song-image ${isPlaying ? 'rotating' : ''}`}
+          />
+          <audio ref={audioRef} controls>
+            <source src="/assets/audio/song1.mp3" type="audio/mpeg" />
+            您的浏览器不支持 audio 元素。
+          </audio>
+          <button className="play-button" onClick={togglePlay}>
+            {isPlaying ? '暂停' : '播放'}
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
 
-const TriggerPart = styled('span', {
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  width: '100%',
-  height: '100%',
-  borderRadius: 8,
-})
-
-const TriggerShadow = styled(TriggerPart, {
-  background: 'hsl(0deg 0% 0% / 0.1)',
-  transform: 'translateY(2px)',
-  transition: 'transform 250ms ease-out',
-})
-
-const TriggerEdge = styled(TriggerPart, {
-  background: `linear-gradient(
-      to left,
-      hsl(0deg 0% 69%) 0%,
-      hsl(0deg 0% 85%) 8%,
-      hsl(0deg 0% 85%) 92%,
-      hsl(0deg 0% 69%) 100%
-    )`,
-})
-
-const TriggerLabel = styled('span', {
-  display: 'block',
-  position: 'relative',
-  borderRadius: 8,
-  color: '#569AFF',
-  fontSize: '14px',
-  padding: '16px 24px',
-  background: '#fafafa',
-  transform: 'translateY(-4px)',
-  width: '100%',
-  userSelect: 'none',
-  transition: 'transform 250ms ease-out',
-})
-
-const Trigger = styled(Dialog.Trigger, {
-  border: 'none',
-  fontWeight: 600,
-  cursor: 'pointer',
-  background: 'transparent',
-  position: 'relative',
-  padding: 0,
-  cursor: 'pointer',
-  transition: 'filter 250ms ease-out',
-
-  '&:hover': {
-    filter: 'brightness(110%)',
-
-    [`& ${TriggerLabel}`]: {
-      transform: 'translateY(-6px)',
-    },
-
-    [`& ${TriggerShadow}`]: {
-      transform: 'translateY(4px)',
-    },
-  },
-
-  '&:active': {
-    [`& ${TriggerLabel}`]: {
-      transform: 'translateY(-2px)',
-      transition: 'transform 34ms',
-    },
-
-    [`& ${TriggerShadow}`]: {
-      transform: 'translateY(1px)',
-      transition: 'transform 34ms',
-    },
-  },
-})
-
-const OverlayBackground = styled(animated(Dialog.Overlay), {
-  width: '100vw',
-  height: '100vh',
-  backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  pointerEvents: 'all',
-  position: 'fixed',
-  inset: 0,
-})
-
-const Content = styled(animated(Dialog.Content), {
-  position: 'absolute',
-  width: '50vw',
-  height: '60vh',
-  backgroundColor: '#fafafa',
-  borderRadius: 8,
-  padding: '24px 24px 32px',
-})
-
-const DialogHeader = styled('header', {
-  display: 'flex',
-  justifyContent: 'flex-end',
-  marginBottom: 16,
-})
-
-const CloseButton = styled(Dialog.Close, {
-  backgroundColor: 'transparent',
-  border: 'none',
-  position: 'absolute',
-  top: 16,
-  right: 16,
-  cursor: 'pointer',
-  color: '#1B1A22',
-})
-
-const Title = styled(Dialog.Title, {
-  fontSize: 20,
-})
+export default Song1;
