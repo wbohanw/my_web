@@ -39,6 +39,9 @@ const Song1 = ({ buttonText, isOpen, onToggle }) => {
           </button>
         </div>
       )}
+      <button className="button" onClick={() => window.location.href = '/~bwang246/ticket'}>
+        Export to Ticket Page
+      </button>
     </div>
   );
 };
