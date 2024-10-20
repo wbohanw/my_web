@@ -2,14 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import Pointer from './pointer/Pointer.tsx';
+import Ticket from './component/Ticket';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
-    {/* <Pointer/> */}
+    <Router>
+      <Routes>
+        <Route path="/~bwang246" element={<App />} />
+        <Route path="/~bwang246/ticket" element={<Ticket />} />
+      </Routes>
+    </Router>
   </React.StrictMode>
 );
 
