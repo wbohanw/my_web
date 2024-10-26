@@ -1,10 +1,13 @@
 import React, { useState, useRef } from 'react';
 import './Song.css'; // 假设我们将创建一个新的CSS文件来存放样式
+import Ticket from './Ticket';
+
 
 const Song1 = ({ buttonText, isOpen, onToggle }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
-
+  
+  const [showCanvas, setShowCanvas] = useState(false);
   const togglePlay = () => {
     if (audioRef.current) {
       if (isPlaying) {
@@ -39,9 +42,15 @@ const Song1 = ({ buttonText, isOpen, onToggle }) => {
           </button>
         </div>
       )}
-      <button className="button" onClick={() => window.location.href = '/~bwang246/ticket'}>
+      <button className="button" onClick={() => setShowCanvas(true)}>
         Export to Ticket Page
       </button>
+      {showCanvas && (
+        <div className="canvas">
+          <button className="close-button" onClick={() => setShowCanvas(false)}>Close</button>
+          <Ticket />
+        </div>
+      )}
     </div>
   );
 };
