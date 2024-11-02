@@ -1,6 +1,7 @@
 # Personal Website of Bohan Wang
 
 <img width="1710" alt="image" src="https://github.com/user-attachments/assets/5563ff6f-8caf-468e-bd75-c1d84ad14c30">
+
 ## Welcome to My Portfolio
 
 Hello! This is the official repository for my personal website. This site serves as a showcase of my work, projects, and more. Built with a sleek, modern design, my website provides insights into my professional life and interests.
