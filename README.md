@@ -23,7 +23,7 @@ Hello! This is the official repository for my personal website. This site serves
 
 ### How to Access the Site
 
-Visit my world [here]([your-website-link](https://www.cs.mcgill.ca/~bwang246/)).
+Visit my world [here]([https://www.cs.mcgill.ca/~bwang246/]).
 
 ### Future Plans
 
