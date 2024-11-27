@@ -1,13 +1,13 @@
 import './App.css';
 import { NavBar } from './component/NavBar';
 import { Banner } from './component/Banner';
-import {Skills} from "./component/Skills";
 import { Projects } from './component/Project';
 import Ticket from './component/Ticket';
 import "bootstrap/dist/css/bootstrap.min.css"
 import BOHAN from './component/BOHAN.tsx';
 import React from 'react';
 import Pointer from './pointer/Pointer.tsx';
+import Music from './component/music.tsx';
 function App() {
   return (
     <div className="App">
@@ -17,7 +17,7 @@ function App() {
         <Banner />
         {/* <Ticket/> */}
         <Projects />
-        <Skills />
+        {/* <Music/> */}
       </div>
       
       {/* <Contact />
